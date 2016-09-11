@@ -1,2 +1,2 @@
 # Chatwork4s
-A Chatwork4j is Chatwork wrapper for Scala.
+A Chatwork4s is Chatwork wrapper for Scala.

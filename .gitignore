@@ -1,0 +1,18 @@
+*.class
+
+# Package Files
+*.jar
+
+# my test class
+*.idea*
+*.iml*
+*netatmo*
+src/main/java/test/
+
+# gradle packages
+.gradle/
+build/
+lib/
+out/
+
+test.properties
