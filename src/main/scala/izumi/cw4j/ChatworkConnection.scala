@@ -38,7 +38,7 @@ object ChatworkConnection {
     val ps = new PrintStream(os)
 
     header.foreach((e: (String, String)) => {
-      ps.print(e._1 + "=" + URLEncoder.encode(e._2, "UTF-8"));
+      ps.print(e._1 + "=" + URLEncoder.encode(e._2, "UTF-8"))
     })
 
     ps.close()
