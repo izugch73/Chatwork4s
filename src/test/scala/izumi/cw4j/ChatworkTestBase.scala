@@ -23,12 +23,9 @@ trait ChatworkTestBase extends FunSuite
 
   protected val properties: Properties = {
     val p = new Properties
-    // TODO うまいことresourcesにアクセスしたい
-    val path = Paths.get("./src/test/resources/test.properties")
-    println(path.toFile.getCanonicalFile.toString)
-    val br = Files.newBufferedReader(path)
-    p.load(br)
-    br.close
+    val stream = getClass.getClassLoader.getResourceAsStream("test.properties")
+    p.load(stream)
+    stream.close()
     println(p.getProperty("chatworkAPI"))
     println(p.getProperty("roomId"))
     p
