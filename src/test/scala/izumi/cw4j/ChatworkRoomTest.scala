@@ -1,62 +1,54 @@
 package izumi.cw4j
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import cw4j.ChatworkRoom
-import cw4j.bean.{NetChatbotMessage, NetMessage, NetSendMessage}
-import junit.framework.TestCase
+import izumi.cw4j.bean.NetSendMessage
 
 /**
   * ChatworkRoom class test
   *
   * Created by dys on 2016/08/16.
   */
-class ChatworkRoomTest(override val name: String) extends ChatworkTestBase(name) {
+class ChatworkRoomTest extends ChatworkTestBase {
 
-	@throws[Exception]
-	def testGetMembers() {
-		val room: ChatworkRoom = Chatwork4j.getRoom(chatworkAPI, roomId)
-		TestCase.assertNotNull(room.getMembers)
-	}
+  test("members") {
+    val room = Chatwork4j.room(chatworkAPI, roomId)
+    assert(room.members() != null)
+  }
 
-	@throws[Exception]
-	def testInfoMessage() {
-		val room: ChatworkRoom = Chatwork4j.getRoom(chatworkAPI, roomId)
-		val info: NetSendMessage = room.sendInformationMessage("INFO MESSAGE")
-		TestCase.assertNotNull(info.getMessage_id)
-	}
+  test("info message") {
+    val room = Chatwork4j.room(chatworkAPI, roomId)
+    val info = room.sendInformationMessage("INFO MESSAGE")
+    assert(info != null)
+  }
 
-	@throws[Exception]
-	def testInfoTitleMessage() {
-		val room: ChatworkRoom = Chatwork4j.getRoom(chatworkAPI, roomId)
-		val titleInfo: NetSendMessage = room.sendInformationMessage("TITLE MESSAGE", "INFO TITLE")
-		TestCase.assertNotNull(titleInfo.getMessage_id)
-	}
+  test("infoTitleMessage") {
+    val room: ChatworkRoom = Chatwork4j.room(chatworkAPI, roomId)
+    val titleInfo: NetSendMessage = room.sendInformationMessage("TITLE MESSAGE", Some("INFO TITLE"))
+    assert(titleInfo.getMessage_id != null)
+  }
 
-	@throws[Exception]
-	def testGetMessages() {
-		val room: ChatworkRoom = Chatwork4j.getRoom(chatworkAPI, roomId)
-		val msgs: Seq[NetMessage] = room.getMessages(true)
-		TestCase.assertNotNull(msgs)
-		for (msg <- msgs) {
-			System.out.println(msg.toString)
-		}
-	}
+  test("messages") {
+    val room = Chatwork4j.room(chatworkAPI, roomId)
+    val msgs = room.messages(true)
+    assert(msgs != null)
+  }
 
-//	@throws[Exception]
-//	def testReplyOrToMessages() {
-//		while (true) {
-//			val room: ChatworkRoom = Chatwork4j.getRoom(chatworkAPI, roomId)
-//			val msgs: Seq[NetMessage] = room.getReplyOrToMessages(true, 1880430)
-//			for (msg <- msgs) {
-//				// 各メッセージに対して
-//				val message: String = msg.getBody.substring(msg.getBody.indexOf("\n") + 1)
-//				System.out.println(message)
-//				val url: String = "https://chatbot-api.userlocal.jp/api/chat?message=" + message + "&key=a922d80e3d31ff1274b3"
-//				val json: String = ChatworkConnection.get(url, null)
-//				val ncbm: NetChatbotMessage = new ObjectMapper().readValue(json, classOf[NetChatbotMessage])
-//				room.sendMessage("[To:" + msg.getAccount.getAccount_id + "]" + msg.getAccount.getName + "さん\n" + ncbm.getResult)
-//			}
-//			Thread.sleep(60000)
-//		}
-//	}
+  //  test("replyOrToMessages") {
+  //    val mapper = new ObjectMapper
+  //    mapper.registerModule(DefaultScalaModule)
+  //
+  //    while (true) {
+  //      val room = Chatwork4j.room(chatworkAPI, roomId)
+  //      val msgs = room.replyOrToMessages(true, 1880430)
+  //      for (msg <- msgs) {
+  //        // 各メッセージに対して
+  //        val message = msg.body.substring(msg.body.indexOf("\n") + 1)
+  //        println(message)
+  //        val url = "https://chatbot-api.userlocal.jp/api/chat?message=" + message + "&key=a922d80e3d31ff1274b3"
+  //        val json = ChatworkConnection.get(url, null)
+  //        val ncbm = mapper.readValue(json, classOf[NetChatbotMessage])
+  //        room.sendMessage("[To:" + msg.account.account_id + "]" + msg.account.name + "さん\n" + ncbm.getResult)
+  //      }
+  //      Thread.sleep(60000)
+  //    }
+  //  }
 }

@@ -1,11 +1,11 @@
-package cw4j.bean
+package izumi.cw4j.bean
 
 /**
-  * Created by izumi on 2016/08/02.
+  * Created by izumi on 2016/08/01.
   */
-class NetContact {
+class NetRoomMember {
   private var account_id: Int = 0
-  private var room_id: Int = 0
+  private var role: String = null
   private var name: String = null
   private var chatwork_id: String = null
   private var organization_id: Int = 0
@@ -21,12 +21,12 @@ class NetContact {
     this.account_id = account_id
   }
 
-  def getRoom_id: Int = {
-    return room_id
+  def getRole: String = {
+    return role
   }
 
-  def setRoom_id(room_id: Int) {
-    this.room_id = room_id
+  def setRole(role: String) {
+    this.role = role
   }
 
   def getName: String = {
@@ -78,6 +78,6 @@ class NetContact {
   }
 
   override def toString: String = {
-    return "NetContact{" + "account_id=" + account_id + ", room_id=" + room_id + ", name='" + name + '\'' + ", chatwork_id='" + chatwork_id + '\'' + ", organization_id=" + organization_id + ", organization_name='" + organization_name + '\'' + ", department='" + department + '\'' + ", avatar_image_url='" + avatar_image_url + '\'' + '}'
+    return "NetRoomMember{" + "account_id=" + account_id + ", role='" + role + '\'' + ", name='" + name + '\'' + ", chatwork_id='" + chatwork_id + '\'' + ", organization_id=" + organization_id + ", organization_name='" + organization_name + '\'' + ", department='" + department + '\'' + ", avatar_image_url='" + avatar_image_url + '\'' + '}'
   }
 }

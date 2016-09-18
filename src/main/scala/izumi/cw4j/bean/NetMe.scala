@@ -1,4 +1,4 @@
-package cw4j.bean
+package izumi.cw4j.bean
 
 /**
   * Created by izumi on 2016/08/01.
